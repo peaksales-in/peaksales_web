@@ -1,0 +1,689 @@
+/* Modern Design CSS with Advanced Gradient and Enhanced Typography */
+
+/* Global Link Styling */
+a {
+    text-decoration: none !important;
+}
+
+/* Color Palette */
+:root {
+    --primary-color: #5433ff;
+    --secondary-color: #20bdff;
+    --accent-color: #20bdff;
+    --dark-bg: #121212;
+    --light-text: rgba(255, 255, 255, 0.87);
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+/* Custom Scrollbar Styling */
+
+/* Global Scrollbar Styling */
+::-webkit-scrollbar {
+    width: 12px;
+    /* Width for vertical scrollbar */
+    height: 12px;
+    /* Height for horizontal scrollbar */
+}
+
+/* Scrollbar Track Styling (background) */
+::-webkit-scrollbar-track {
+    background: #333333;
+    /* Dark grey/black background for the track */
+    border-radius: 10px;
+}
+
+/* Scrollbar Thumb Styling (the draggable part) */
+::-webkit-scrollbar-thumb {
+    background-color: #000000;
+    /* Black color for the thumb */
+    border-radius: 10px;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    /* Optional subtle border to add contrast */
+    transition: background-color 0.3s ease;
+    /* Smooth transition for hover effect */
+}
+
+/* Scrollbar Thumb Hover Effect */
+::-webkit-scrollbar-thumb:hover {
+    background-color: #444444;
+    /* Slightly lighter black on hover */
+}
+
+/* Optional: Scrollbar Corner (bottom-right) */
+::-webkit-scrollbar-corner {
+    background-color: transparent;
+    /* Transparent corner */
+}
+
+/* Firefox Scrollbar Styling (using scrollbar-width and scrollbar-color) */
+* {
+    scrollbar-width: thin;
+    /* Thin scrollbar for Firefox */
+    scrollbar-color: #000000 #333333;
+    /* Thumb color and track color in Firefox */
+}
+
+/* Mobile Layout Consideration */
+@media (max-width: 767px) {
+
+    html,
+    body {
+        overflow-x: hidden;
+        width: 100%;
+    }
+
+    /* Hide scrollbar on mobile if not essential */
+    ::-webkit-scrollbar {
+        display: none;
+    }
+}
+
+/* Specific Scrollbar Styles for Content Areas */
+.content-panel {
+    overflow-y: auto;
+    max-height: 80vh;
+    scrollbar-width: thin;
+    scrollbar-color: #000000 #333333;
+    /* Custom scrollbar on these elements */
+}
+
+/* Additional custom scrollbar styling for all overflow elements */
+.content-panel::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+.content-panel::-webkit-scrollbar-thumb {
+    background-color: #000000;
+    border-radius: 10px;
+}
+
+.content-panel::-webkit-scrollbar-thumb:hover {
+    background-color: #444444;
+    /* Darker shade of black for hover effect */
+}
+
+/* Responsive Typography */
+body {
+    font-family: 'Inter', 'Segoe UI', Roboto, system-ui, -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
+    background-color: var(--dark-bg);
+    color: var(--light-text);
+    line-height: 1.6;
+    font-size: 16px;
+}
+
+/* Advanced Gradient Animation */
+@keyframes gradientFlow {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+/* Gradient Background Utility */
+.gradient-bg {
+    background: linear-gradient(-45deg,
+            var(--primary-color),
+            var(--secondary-color),
+            var(--secondary-color));
+    background-size: 400% 400%;
+    animation: gradientFlow 15s ease infinite;
+    color: var(--light-text);
+}
+
+/* Navbar Styling */
+.navbar-nav {
+    gap: 1.5rem;
+}
+
+.navbar-logo {
+    width: 30px;
+    height: auto;
+    margin-right: 10px;
+}
+
+/* Transparent Navbar for Large Screens */
+@media (min-width: 992px) {
+    .navbar {
+        background-color: transparent !important;
+        position: absolute;
+        width: 100%;
+        top: 0;
+        z-index: 1100;
+        transition: all 0.3s ease-in-out;
+        padding: 0.5rem 0;
+    }
+
+    .navbar.scrolled {
+        background-color: rgba(18, 18, 18, 0.9) !important;
+        backdrop-filter: blur(15px);
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .navbar-nav .nav-link {
+        color: rgba(255, 255, 255, 0.8);
+        font-size: 1rem;
+        font-weight: 500;
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+        padding: 0.5rem 0;
+    }
+
+    .navbar-nav .nav-link::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background-color: var(--accent-color);
+        transform: scaleX(0);
+        transition: transform 0.3s ease;
+    }
+
+    .navbar-nav .nav-link:hover::after {
+        transform: scaleX(1);
+    }
+
+    .navbar-brand {
+        color: white !important;
+        font-weight: bold;
+        font-size: 1.3rem;
+    }
+}
+
+/* Mobile Navbar */
+@media (max-width: 991px) {
+    .navbar {
+        background: linear-gradient(135deg,
+                rgba(162, 157, 184, 0.9),
+                rgba(32, 189, 255, 0.9));
+        padding: 0.5rem 0;
+        position: relative;
+    }
+
+    .navbar a {
+        color: var(--light-text);
+        text-decoration: none;
+        transition: color 0.3s ease;
+        font-size: 1rem;
+    }
+
+    .navbar a:hover {
+        color: var(--accent-color);
+    }
+
+    .navbar-nav {
+        gap: 0;
+        /* Remove spacing between links */
+    }
+}
+
+/* Section Styling */
+/* Hero Section */
+.hero-section {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    padding: 6rem 0;
+}
+
+.hero-section .container {
+    position: relative;
+    z-index: 10;
+}
+
+.hero-section .display-4 {
+    font-size: 4rem;
+    font-weight: 700;
+    color: var(--light-text);
+    margin-bottom: 1.5rem;
+}
+
+.hero-section .lead {
+    font-size: 1.5rem;
+    color: rgba(255, 255, 255, 0.85);
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/* Services Section */
+.services-section {
+    min-height: 100vh;
+    background: var(--dark-bg);
+    padding: 80px 0;
+    color: var(--light-text);
+    overflow: hidden;
+}
+
+/* Container Adjustments */
+.services-section .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    padding: 0 20px;
+    align-items: start;
+}
+
+/* Service Cards */
+/* Container Styles */
+.services-container {
+    overflow-y: auto;
+    max-height: 80vh;
+    padding: 20px;
+    scrollbar-width: thin;
+    scrollbar-color: var(--secondary-color) transparent;
+}
+
+.services-container::-webkit-scrollbar {
+    width: 6px;
+}
+
+.services-container::-webkit-scrollbar-thumb {
+    background-color: var(--secondary-color);
+    border-radius: 3px;
+}
+
+/* Grid Layout */
+.services-section .container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    position: relative;
+}
+
+/* Service Cards */
+.service-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.service-card {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 24px;
+    padding: 40px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    opacity: 0.6;
+    transform: translateX(-20px);
+    cursor: pointer;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.service-card.active {
+    opacity: 1;
+    transform: translateX(0);
+    background: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 20px 40px var(--secondary-color);
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Icons and Headings */
+.service-card i {
+    color: var(--secondary-color);
+    font-size: 24px;
+    margin-bottom: 15px;
+}
+
+.service-card h3 {
+    color: var(--secondary-color);
+    margin-bottom: 15px;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+/* Content Panel */
+.content-panel {
+    position: sticky;
+    top: 80px;
+}
+
+.content-wrapper {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 24px;
+    padding: 40px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    max-height: 80vh;
+    overflow: hidden;
+}
+
+.panel-content {
+    display: none;
+}
+
+.panel-content.active {
+    display: block;
+}
+
+/* Responsive Styles */
+@media (max-width: 767px) {
+    .services-section .container {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .content-panel {
+        display: none;
+        /* Hide right panel on mobile */
+    }
+
+    .services-container {
+        max-height: none;
+        /* Remove height restriction on mobile */
+    }
+
+    .service-card {
+        transform: none;
+        /* Remove transform effect on mobile */
+        opacity: 1;
+        /* Keep cards fully visible on mobile */
+    }
+}
+
+/* Testimonial Section */
+#testimonials-section h2 {
+    color: #000000;
+    font-weight: 600;
+    margin-bottom: 2rem;
+}
+
+/* Testimonial Cards */
+.testimonial-card {
+    background-color: white;
+    border-radius: 8px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.testimonial-card:hover {
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+    transform: translateY(-2px);
+}
+
+.testimonial-card .author {
+    display: flex;
+    align-items: center;
+    margin-top: 1.5rem;
+}
+
+.testimonial-card .author-image {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    margin-right: 1rem;
+    background-color: #f0f0f0;
+}
+
+.testimonial-card .author-info {
+    line-height: 1.4;
+}
+
+.testimonial-card .author-name {
+    font-weight: 600;
+    color: var(--dark-bg);
+    margin: 0;
+}
+
+.testimonial-card .author-title {
+    color: #666;
+    font-size: 0.9rem;
+    margin: 0;
+}
+
+.testimonial-card .content {
+    color: #333;
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 0;
+}
+
+/* Testimonial Grid Layout */
+@media (min-width: 768px) {
+    .testimonials-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2rem;
+    }
+
+    .testimonial-card {
+        margin-bottom: 0;
+    }
+}
+
+/* CTA Section */
+.cta-section {
+    background: linear-gradient(135deg,
+            var(--primary-color),
+            var(--secondary-color));
+    color: white;
+    text-align: center;
+    padding: 6rem 0;
+}
+
+.cta-section h2 {
+    font-size: 3rem;
+    margin-bottom: 1.5rem;
+}
+
+/* Footer */
+footer {
+    background-color: var(--dark-bg);
+    color: var(--light-text);
+    padding: 3rem 0 1rem;
+    position: relative;
+}
+
+footer .footer-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    /* Default 4-column layout */
+    gap: 2rem;
+    padding: 0 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+footer .footer-section {
+    width: 100%;
+}
+
+footer .footer-heading {
+    font-size: 1.125rem;
+    font-weight: 600;
+    margin-bottom: 1.25rem;
+    color: white;
+}
+
+footer .footer-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+footer .footer-list li {
+    margin: 0.75rem 0;
+}
+
+footer .footer-list a {
+    color: var(--accent-color);
+    transition: color 0.3s ease;
+    font-size: 0.95rem;
+}
+
+footer .footer-list a:hover {
+    color: white;
+}
+
+footer .btn-website {
+    display: inline-block;
+    background-color: var(--accent-color);
+    padding: 0.75rem 1.25rem;
+    border-radius: 5px;
+    color: var(--light-text);
+    margin-top: 1rem;
+    transition: all 0.3s ease;
+}
+
+footer .btn-website:hover {
+    background-color: var(--primary-color);
+    transform: translateY(-2px);
+}
+
+footer .footer-bottom {
+    text-align: center;
+    margin-top: 1.5rem;
+    padding: 0.5rem 0;
+    border-top: none;
+}
+
+footer .footer-bottom p {
+    margin: 0;
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+/* Tablet Layout */
+@media (max-width: 992px) {
+    footer .footer-container {
+        grid-template-columns: repeat(4, 1fr);
+        /* Keep the 4-column layout for tablets */
+        gap: 1rem;
+    }
+
+    footer .footer-section {
+        padding: 0;
+    }
+
+    footer .footer-heading {
+        font-size: 1.125rem;
+        /* Adjust heading size for readability */
+    }
+
+    footer .footer-list li {
+        margin: 0.5rem 0;
+    }
+
+    footer .btn-website {
+        display: block;
+        width: 100%;
+        text-align: center;
+        margin: 1rem auto;
+    }
+
+    footer .footer-bottom {
+        margin-top: 1rem;
+        padding: 0.5rem 0;
+    }
+}
+
+/* Mobile Layout - 3 Columns with Logo at the Top */
+/* Mobile Layout - 2 Columns with Logo at the Top */
+@media (max-width: 600px) {
+    footer .footer-container {
+        grid-template-columns: repeat(2, 1fr);
+        /* 2-column layout for mobile */
+        gap: 1rem;
+        /* Reduced gap for better spacing */
+        padding: 0 10px;
+        /* Reduce padding for mobile devices */
+    }
+
+    footer .footer-logo {
+        text-align: center;
+        margin-bottom: 1rem;
+        /* Margin for spacing */
+        width: 100%;
+        grid-column: span 2;
+        /* Ensure the logo spans both columns */
+    }
+
+    footer .footer-logo img {
+        max-width: 100px;
+        /* Adjust logo size for mobile */
+        display: block;
+        margin: 0 auto;
+    }
+
+    footer .footer-section {
+        padding: 0;
+        /* Remove extra padding in sections */
+    }
+
+    footer .footer-list {
+        padding-left: 0;
+        /* Align list items */
+    }
+
+    footer .footer-list li {
+        margin: 0.5rem 0;
+        /* Reduced margin for mobile */
+    }
+
+    footer .btn-website {
+        display: block;
+        width: 100%;
+        margin: 1rem auto;
+    }
+
+    footer .footer-bottom {
+        margin-top: 0.5rem;
+        /* Reduced top margin for footer bottom */
+        padding: 0.5rem 0;
+    }
+}
+
+/* Larger Screens */
+@media (min-width: 1200px) {
+    footer .footer-container {
+        padding: 0 20px;
+        /* Reverted padding back to 20px */
+    }
+}
+
+/* Utility Classes */
+.text-accent {
+    color: var(--accent-color);
+}
+
+.btn-primary {
+    background: linear-gradient(45deg,
+            var(--primary-color),
+            var(--secondary-color));
+    border: none;
+    transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Responsive Typography */
+@media (max-width: 768px) {
+    .hero-section .display-4 {
+        font-size: 2.5rem;
+    }
+
+    .hero-section .lead {
+        font-size: 1.2rem;
+    }
+}

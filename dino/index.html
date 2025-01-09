@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dino</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #f7f7f7;
+            overflow: hidden;
+        }
+
+        .game-container {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            height: 300px;
+            background-color: #e0e0e0;
+            border: 2px solid #333;
+            overflow: hidden;
+        }
+
+        #player {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            background-color: #333;
+            bottom: 0;
+            left: 50px;
+        }
+
+        #obstacle {
+            position: absolute;
+            width: 30px;
+            height: 50px;
+            background-color: #ff5733;
+            bottom: 0;
+            right: -30px;
+            /* Default starting position */
+        }
+
+        #scoreboard {
+            display: flex;
+            justify-content: space-between;
+            width: 300px;
+            margin-top: 10px;
+        }
+
+        #game-over-container {
+            display: none;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 300px;
+            background-color: #fff;
+            border: 2px solid #333;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+        }
+
+        #game-over-container h2 {
+            margin: 0 0 20px 0;
+        }
+
+        #game-over-container button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="game-container">
+        <div id="player"></div>
+        <div id="obstacle"></div>
+    </div>
+    <div id="scoreboard">
+        <h2>Score: <span id="score">0</span></h2>
+        <h2>High Score: <span id="highScore">0</span></h2>
+    </div>
+
+    <div id="game-over-container">
+        <h2>Game Over!</h2>
+        <p>Your final score: <span id="finalScore">0</span></p>
+        <button onclick="resetGame()">Play Again</button>
+    </div>
+
+    <script>
+        // DOM Elements
+        const player = document.getElementById('player');
+        const obstacle = document.getElementById('obstacle');
+        const scoreEl = document.getElementById('score');
+        const highScoreEl = document.getElementById('highScore');
+        const gameOverContainer = document.getElementById('game-over-container');
+        const finalScoreEl = document.getElementById('finalScore');
+
+        // Game State
+        const game = {
+            score: 0,
+            highScore: parseInt(localStorage.getItem('dinoHighScore') || '0'),
+            isJumping: false,
+            isGameOver: false,
+            obstacleSpeed: 5,
+            delayTriggered: false // For handling dino trigger delay
+        };
+
+        highScoreEl.textContent = game.highScore;
+
+        // Jump Function
+        function jump() {
+            if (!game.isJumping && !game.isGameOver) {
+                game.isJumping = true;
+                let position = 0;
+
+                const jumpUp = setInterval(() => {
+                    if (position >= 150) {
+                        clearInterval(jumpUp);
+                        const fallDown = setInterval(() => {
+                            if (position <= 0) {
+                                clearInterval(fallDown);
+                                player.style.bottom = '0px';
+                                game.isJumping = false;
+                            }
+                            position -= 10;
+                            player.style.bottom = `${position}px`;
+                        }, 20);
+                    }
+                    position += 10;
+                    player.style.bottom = `${position}px`;
+                }, 20);
+            }
+        }
+
+        // Obstacle Movement and Collision
+        function updateGame() {
+            if (game.isGameOver) return;
+
+            let obstacleRight = parseInt(window.getComputedStyle(obstacle).right);
+
+            if (!game.delayTriggered) {
+                // Move the obstacle normally
+                obstacleRight += game.obstacleSpeed;
+                obstacle.style.right = `${obstacleRight}px`;
+            }
+
+            // Reset the obstacle when off-screen
+            if (obstacleRight >= 800) {
+                obstacle.style.right = '-30px';
+                game.score++;
+                scoreEl.textContent = game.score;
+
+                if (game.score % 5 === 0) {
+                    game.obstacleSpeed += 1;
+                }
+            }
+
+            // Collision Detection
+            const playerRect = player.getBoundingClientRect();
+            const obstacleRect = obstacle.getBoundingClientRect();
+
+            if (
+                playerRect.right > obstacleRect.left &&
+                playerRect.left < obstacleRect.right &&
+                playerRect.bottom > obstacleRect.top
+            ) {
+                gameOver();
+            }
+        }
+
+        // Game Over
+        function gameOver() {
+            game.isGameOver = true;
+
+            if (game.score > game.highScore) {
+                game.highScore = game.score;
+                localStorage.setItem('dinoHighScore', game.highScore);
+                highScoreEl.textContent = game.highScore;
+            }
+
+            gameOverContainer.style.display = 'block';
+            finalScoreEl.textContent = game.score;
+        }
+
+        // Reset Game
+        function resetGame() {
+            game.score = 0;
+            game.isGameOver = false;
+            game.obstacleSpeed = 5;
+            game.delayTriggered = false;
+
+            scoreEl.textContent = '0';
+            player.style.bottom = '0px';
+            obstacle.style.right = '-30px';
+            gameOverContainer.style.display = 'none';
+        }
+
+        // Listen for "dino" Trigger
+        let typedKeys = '';
+        document.addEventListener("keydown", function (event) {
+            if (game.delayTriggered) return;
+
+            typedKeys += event.key.toLowerCase();
+
+            if (typedKeys === "dino") {
+                game.delayTriggered = true;
+                setTimeout(() => {
+                    game.delayTriggered = false; // Remove delay after a short pause
+                }, 2000); // 2-second delay before the obstacle moves
+                typedKeys = '';
+            } else if (!"dino".startsWith(typedKeys)) {
+                typedKeys = '';
+            }
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.code === 'Space') jump();
+        });
+
+        document.addEventListener('touchstart', jump);
+
+        // Game Loop
+        setInterval(updateGame, 20);
+    </script>
+</body>
+
+</html>
