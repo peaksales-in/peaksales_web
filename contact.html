@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description"
+    content="Contact Peak Sales - Your trusted partner in driving business growth through expert sales solutions.">
+  <meta name="author" content="Karan Soni, https://simplisoni.github.io/">
+  <meta name="robots" content="index, follow">
+  <title>Peak Sales | Contact Us</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.1/aos.css" rel="stylesheet">
+  <link rel="icon" href="assets/images/logo-white.png" type="image/x-icon">
+  <link rel="stylesheet" href="assets/css/styles.css">
+  <style>
+    .hero-section {
+      padding: 3rem 0;
+      min-height: 90vh;
+    }
+
+    /* Form Section */
+    .contact-card {
+      background-color: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      transition: all 0.3s ease;
+      color: var(--light-text);
+    }
+
+    .contact-card h2,
+    .contact-card h3,
+    .contact-card h4 {
+      color: var(--light-text);
+    }
+
+    .contact-card .form-label {
+      color: var(--light-text);
+    }
+
+    .contact-card .form-control {
+      background-color: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: var(--light-text);
+    }
+
+    .contact-card .form-control::placeholder {
+      color: rgba(255, 255, 255, 0.5);
+    }
+
+    .contact-card .form-control:focus {
+      background-color: rgba(255, 255, 255, 0.15);
+      border-color: var(--accent-color);
+      box-shadow: 0 0 0 0.25rem rgba(32, 189, 255, 0.25);
+    }
+
+    /* Social Links */
+    .social-links .btn-outline-primary {
+      color: var(--accent-color);
+      border-color: var(--accent-color);
+    }
+
+    .social-links .btn-outline-primary:hover {
+      background-color: var(--accent-color);
+      color: var(--dark-bg);
+    }
+
+    /* Map Section */
+    .bg-light {
+      background-color: var(--dark-bg) !important;
+    }
+
+    .bg-light h2 {
+      color: var(--light-text);
+    }
+
+    /* Base background for sections */
+    section:not(.hero-section) {
+      background-color: var(--dark-bg);
+    }
+
+    /* Contact Information Icons */
+    .fas.fa-fw,
+    .contact-card span {
+      color: var(--light-text);
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">
+        <img src="assets/images/logo.png" alt="Peak Sales Logo" style="width: 40px; height: 40px; margin-right: 10px;">
+        Peak Sales
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+          <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero-section gradient-bg text-center" id="hero-section">
+    <div class="container">
+      <h1 class="display-4 fw-bold text-white-50" data-aos="fade-up">Get in Touch</h1>
+      <p class="lead text-white-75" data-aos="fade-up" data-aos-delay="200">We'd love to hear from you. Reach out for
+        inquiries or collaboration opportunities.</p>
+    </div>
+  </section>
+
+  <!-- Contact Form Section -->
+  <section class="py-5">
+    <div class="container" id="contact-form-section">
+      <div class="row g-4">
+        <!-- Contact Form -->
+        <div class="col-md-6" data-aos="fade-right">
+          <div class="card contact-card p-4">
+            <h2 class="fw-bold mb-4">Send Us a Message</h2>
+            <form name="submit-to-google-sheet">
+              <div class="mb-3">
+                <label for="name" class="form-label">Your Name</label>
+                <input type="text" class="form-control" id="name" name="name" placeholder="Enter your name" required>
+              </div>
+              <div class="mb-3">
+                <label for="email" class="form-label">Your Email</label>
+                <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email"
+                  required>
+              </div>
+              <div class="mb-3">
+                <label for="phone" class="form-label">Your Phone Number</label>
+                <input type="tel" class="form-control" id="phone" name="phone" placeholder="Enter your phone number"
+                  required pattern="[0-9]{10}" title="Please enter a valid 10-digit phone number" maxlength="10">
+              </div>
+              <div class="mb-3">
+                <label for="message" class="form-label">Message</label>
+                <textarea class="form-control" id="message" name="message" rows="5" placeholder="Type your message"
+                  required></textarea>
+              </div>
+              <button type="submit" class="btn btn-primary btn-lg">Submit Message</button>
+            </form>
+
+            <!-- Success & Error Messages -->
+            <div id="successmsg" class="alert alert-success mt-3" hidden>
+              <strong>Success!</strong> Your message has been sent.
+            </div>
+            <div id="errormsg" class="alert alert-danger mt-3" hidden>
+              <strong>Error!</strong> There was an error sending your message.
+            </div>
+          </div>
+        </div>
+
+        <!-- Contact Information -->
+        <div class="col-md-6" data-aos="fade-left">
+          <div class="card contact-card p-4">
+            <div class="card-body">
+              <h3 class="fw-bold mb-4">Contact Information</h3>
+              <div class="mb-4">
+                <div class="d-flex align-items-center mb-3">
+                  <i class="fas fa-envelope fa-fw me-2"></i>
+                  <span>peaksales.in@gmail.com</span>
+                </div>
+                <div class="d-flex align-items-center mb-3">
+                  <i class="fas fa-phone fa-fw me-2"></i>
+                  <span>+91 9487788078</span>
+                </div>
+                <div class="d-flex align-items-center mb-3">
+                  <i class="fas fa-map-marker-alt fa-fw me-2"></i>
+                  <span>5/291B SPM NAGER, VANNAKOVIL, NAVALUR KUTTAPPATTU, TRICHY - 620009</span>
+                </div>
+              </div>
+              <h4 class="fw-bold mb-3">Follow Us</h4>
+              <div class="social-links">
+                <a href="https://www.instagram.com/peaksales.in" class="btn btn-outline-primary me-2" target="_blank"
+                  rel="noopener noreferrer">
+                  <i class="fab fa-instagram"></i>
+                </a>
+                <a href="https://www.linkedin.com/company/peaksales/" class="btn btn-outline-primary me-2"
+                  target="_blank" rel="noopener noreferrer">
+                  <i class="fab fa-linkedin"></i>
+                </a>
+                <!-- <a href="https://www.twitter.com" class="btn btn-outline-primary" target="_blank"
+                  rel="noopener noreferrer">
+                  <i class="fa-brands fa-twitter"></i> -->
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Map Section -->
+  <section class="py-5 bg-light">
+    <div class="container text-center">
+      <h2 class="fw-bold mb-4" data-aos="fade-up">Find Us</h2>
+      <div data-aos="fade-up" data-aos-delay="200">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.9274054724983!2d78.5790128!3d10.740078400000002!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x397c367248e2d98f%3A0x1f04f494806b63d2!2sNH45%2C%20Paganur%2C%20620009!5e0!3m2!1sen!2sin!4v1736335205578!5m2!1sen!2sin"
+          width="100%" height="350" style="border:0;" allowfullscreen="" loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-container">
+      <!-- Company Overview Section -->
+      <div class="footer-section company-overview">
+        <a href="index.html">
+          <img src="assets/images/logo-white.png" alt="Peak Sales Logo" class="footer-logo"
+            style="width: 40px; height: 40px; margin-right: 10px;">
+        </a>
+      </div>
+
+      <!-- Quick Links Section -->
+      <div class="footer-section quick-links">
+        <h4 class="footer-heading">Quick Links</h4>
+        <ul class="footer-list">
+          <li><a href="index.html#services-section">Services</a></li>
+          <li><a href="contact.html#contact-form-section">Send Us a Message</a></li>
+          <li><a href="index.html">Home</a></li>
+        </ul>
+      </div>
+
+      <!-- Contact and Social Links Section -->
+      <div class="footer-section contact-social">
+        <h4 class="footer-heading">Connect with Us</h4>
+        <ul class="footer-list">
+          <li><a href="mailto:peaksales.in@gmail.com" aria-label="Email us">Email Us</a></li>
+          <li><a href="https://www.instagram.com/peaksales.in" target="_blank" rel="noopener noreferrer"
+              aria-label="Instagram">Instagram</a></li>
+          <li><a href="https://www.linkedin.com/company/peaksales/" target="_blank" rel="noopener noreferrer"
+              aria-label="LinkedIn">LinkedIn</a></li>
+          <!-- <li><a href="https://www.twitter.com" target="_blank" rel="noopener noreferrer" aria-label="Twitter X"><i
+                class="fa-brands fa-x"></i> X (Twitter)</a></li> -->
+        </ul>
+      </div>
+
+      <!-- Legal Section -->
+      <div class="footer-section legal">
+        <h4 class="footer-heading">Legal</h4>
+        <ul class="footer-list">
+          <li><a href="privacy-policy.html">Privacy Policy</a></li>
+          <li><a href="terms-of-service.html">Terms of Service</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom text-center">
+      <p>&copy; 2024 Peak Sales. All Rights Reserved.</p>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.1/aos.js"></script>
+
+  <!-- Google Sheet Form Submission Script -->
+  <script>
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbw2JIWI7eUR3_DNP73SjVBEIR-h0It8ael8dOI7loFFl1uVb-6nip3WV3nxR7GQUMWv/exec';
+    const form = document.forms['submit-to-google-sheet'];
+    const successmsg = document.getElementById('successmsg');
+    const errormsg = document.getElementById('errormsg');
+
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+      const phoneInput = document.getElementById('phone');
+      const phonePattern = /^[0-9]{10}$/;
+
+      if (!phonePattern.test(phoneInput.value) || phoneInput.value.length > 10) {
+        alert('Please enter a valid 10-digit phone number.');
+        return;
+      }
+
+      fetch(scriptURL, { method: 'POST', body: new FormData(form) })
+        .then(response => {
+          if (response.ok) {
+            successmsg.hidden = false;
+            form.reset(); // Clear form after successful submission
+          } else {
+            errormsg.hidden = false;
+          }
+        })
+        .catch(error => {
+          console.error('Error!', error);
+          errormsg.hidden = false;
+        });
+    });
+  </script>
+
+  <!-- Animation Initialization -->
+  <script>
+    AOS.init();
+
+    // GSAP Animations
+    gsap.registerPlugin(ScrollTrigger);
+
+    // Hero Section Animation
+    gsap.to("#hero-section", {
+      opacity: 1,
+      y: 0,
+      duration: 1,
+      scrollTrigger: {
+        trigger: "#hero-section",
+        start: "top 80%",
+      },
+    });
+  </script>
+</body>
+
+</html>
